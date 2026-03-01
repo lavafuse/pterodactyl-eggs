@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-03-01T16:09:18+09:00",
+    "name": "Valkey 9",
+    "author": "admin@lavafuse.net",
+    "description": "Valkey is an open-source in-memory key\u2013value database, used as a distributed cache and message broker, with optional durability. Because it holds all data in memory and because of its design, Valkey offers low-latency reads and writes, making it particularly suitable for use cases that require a cache.",
+    "features": [],
+    "docker_images": {
+        "Valkey 9": "ghcr.io\/lavafuse\/yolks:valkey_9"
+    },
+    "file_denylist": [],
+    "startup": "valkey-server \/home\/container\/valkey.conf --save 60 1 --dir \/home\/container\/ --bind 0.0.0.0 --port {{SERVER_PORT}} --requirepass {{SERVER_PASSWORD}} --maxmemory {{SERVER_MEMORY}}mb",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Configuration loaded\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apk update\r\napk add --no-cache curl\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ ! -d \/mnt\/server\/valkey.conf ]; then\r\n    curl https:\/\/raw.githubusercontent.com\/lavafuse\/pterodactyl-eggs\/refs\/heads\/main\/valkey\/9\/valkey.conf -o valkey.conf\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Valkey Password",
+            "description": "The password valkey should use to secure the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "P@55w0rd",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}
