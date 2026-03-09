@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-03-09T13:10:51+09:00",
+    "name": "Postgres 18 - Backup",
+    "author": "admin@lavafuse.net",
+    "description": "PostgreSQL 18 Backup System",
+    "features": [],
+    "docker_images": {
+        "Postgres 18": "ghcr.io\/lavafuse\/yolks:postgres_18"
+    },
+    "file_denylist": [],
+    "startup": ".\/backup.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#! \/bin\/ash\r\nadduser -D -h \/home\/container container\r\n\r\nchown -R container: \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\nwget https:\/\/gist.githubusercontent.com\/ATTSUMAN08\/6ef5fa0d878afefd8f3e3a51f89c3084\/raw\/70f6b1e50f4de78c2d990c3443a754070db51bb7\/backup.sh\r\nchmod +x backup.sh\r\n\r\necho -e \"Done\"",
+            "container": "postgres:18-alpine",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
